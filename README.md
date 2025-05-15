@@ -6,11 +6,13 @@ Smith your data for tomorrow’s intelligence!
 ![LangChain](https://img.shields.io/badge/LangChain-0.2.0%2B-orange)
 ![OpenAI](https://img.shields.io/badge/OpenAI-1.25%2B-red)
 
+
 ## 📚 Overview
 
 CorpusCrafter is an advanced tool designed to transform PDF documents into structured AI training datasets following OpenAI's system/user/assistant format. Created specifically for researchers, data scientists, and AI developers, this tool streamlines the process of preparing high-quality conversational data for fine-tuning language models.
 
 CorpusCrafter intelligently extracts content from books, academic papers, and technical documents, divides them into meaningful chunks, and automatically generates relevant questions for each text segment. The result is a perfectly formatted dataset ready for AI model training and evaluation.
+
 
 ## ✨ Key Features
 
@@ -41,6 +43,7 @@ CorpusCrafter intelligently extracts content from books, academic papers, and te
 - **Progress Tracking**: Real-time progress indicator with tqdm
 - **Comprehensive Logging**: Configurable logging system for detailed debugging and tracking
 - **Optional Dependencies**: Minimum requirements for core functionality, optional packages for advanced features
+
 
 ## 🚀 Installation
 
@@ -87,6 +90,7 @@ python -m spacy download en_core_web_sm   # English language model
 python -m spacy download tr_core_news_sm  # Turkish language model
 
 ```
+
 
 ## 📖 Usage
 
@@ -161,6 +165,8 @@ python -m corpuscrafter --file document.pdf --use-local-embeddings
 When working with advanced options, you can combine multiple parameters to create a highly customized conversion pipeline. CorpusCrafter's modular architecture ensures that each component (extraction, processing, chunking, question generation) can be independently configured to match your specific requirements.
 The verbose mode (--verbose) provides detailed logs of each processing step, which is particularly useful when fine-tuning your parameters or debugging issues with complex documents.
 
+
+
 ## 📊 Example Output
 
 The tool generates a CSV file with the following structure:
@@ -189,6 +195,7 @@ The tool generates a CSV file with the following structure:
 | `--list-splitters`  | `-ls` | List available text-splitting algorithms                        | —            |
 | `--list-languages`  | `-ll` | List supported languages                                        | —            |
 | `--version`         | `-v`  | Show version information                                        | —            |
+
 
 
 ## 🔍 Technical Details
@@ -222,6 +229,7 @@ Question generation is performed using the OpenAI API as follows:
 - **Error Handling:** Implements retry logic and backoff strategy for API errors
 
 
+
 ## 🤝 Contributing
 We welcome your contributions! Here are several ways you can contribute:
 
@@ -229,6 +237,8 @@ We welcome your contributions! Here are several ways you can contribute:
 - **Feature Requests:** Suggest new features or improvements
 - **Code Contributions:** Contribute to the codebase by submitting Pull Requests
 - **Documentation Improvements:** Help improve the documentation
+
+
 
 ## 📄 License
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -240,6 +250,8 @@ This tool leverages the following open source projects:
 - OpenAI - For language models
 - pandas - For data manipulation
 - spaCy - For linguistic analysis (optional)
+
+
 
 ## 📝 Frequently Asked Questions
 
