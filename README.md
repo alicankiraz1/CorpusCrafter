@@ -161,6 +161,36 @@ python -m corpuscrafter --file document.pdf --use-local-embeddings
 When working with advanced options, you can combine multiple parameters to create a highly customized conversion pipeline. CorpusCrafter's modular architecture ensures that each component (extraction, processing, chunking, question generation) can be independently configured to match your specific requirements.
 The verbose mode (--verbose) provides detailed logs of each processing step, which is particularly useful when fine-tuning your parameters or debugging issues with complex documents.
 
+## 📊 Example Output
+
+The tool generates a CSV file with the following structure:
+
+| chunk_id | system | user              | assistant                     |
+|----------|--------|-------------------|-------------------------------|
+| uuid-1   |        | Text chunk 1…     | Question about chunk 1?       |
+| uuid-2   |        | Text chunk 2…     | Question about chunk 2?       |
+| …        |        | …                 | …                             |
+
+---
+
+## 🔧 Available Options
+
+| Option              | Short | Description                                                     | Default      |
+|---------------------|-------|-----------------------------------------------------------------|--------------|
+| `--input`           | `-i`  | Input directory that contains PDF files                         | `input`      |
+| `--output`          | `-o`  | Output directory for generated CSV files                        | `output`     |
+| `--file`            | `-f`  | Specific PDF file to process (optional)                         | —            |
+| `--model`           | `-m`  | OpenAI model to use                                             | `gpt-4o-mini`|
+| `--splitter`        | `-s`  | Text-splitting algorithm                                        | `recursive`  |
+| `--chunk-size`      | `-cs` | Chunk size in characters                                        | `2000`       |
+| `--chunk-overlap`   | `-co` | Overlap between chunks in characters                            | `200`        |
+| `--language`        | `-l`  | Document language (`auto` for automatic detection)              | `auto`       |
+| `--list-models`     | `-lm` | List available OpenAI models                                    | —            |
+| `--list-splitters`  | `-ls` | List available text-splitting algorithms                        | —            |
+| `--list-languages`  | `-ll` | List supported languages                                        | —            |
+| `--version`         | `-v`  | Show version information                                        | —            |
+
+
 ## 🔍 Technical Details
 
 ### PDF Extraction Process
