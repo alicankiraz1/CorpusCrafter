@@ -1,4 +1,7 @@
 # CorpusCrafter: PDF to AI Dataset Generator
+
+<img src="https://github.com/alicankiraz1/CorpusCrafter/blob/main/CorpusCrafter.png" width="500" height="500">
+
 Smith your data for tomorrow’s intelligence!
 
 ![GitHub License](https://img.shields.io/badge/license-MIT-green)
