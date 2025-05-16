@@ -1,4 +1,4 @@
-# CorpusCrafter: PDF to AI Dataset Generator
+# CorpusCrafter
 
 <img src="https://github.com/alicankiraz1/CorpusCrafter/blob/main/CorpusCrafter.png" width="500" height="500">
 
