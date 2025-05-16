@@ -2,7 +2,7 @@
 
 <img src="https://github.com/alicankiraz1/CorpusCrafter/blob/main/CorpusCrafter.png" width="500" height="500">
 
-Smith your data for tomorrow’s intelligence!
+Smith your data for tomorrow's intelligence!
 
 ![GitHub License](https://img.shields.io/badge/license-MIT-green)
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
@@ -29,17 +29,29 @@ CorpusCrafter intelligently extracts content from books, academic papers, and te
 - **Heading and Question Analysis**: Intelligently identifies headings, filters questions, and preserves the structural integrity of the text
 - **Unicode Normalization**: Applies Unicode NFKC normalization for proper text processing
 - **Linguistic Analysis**: Optionally uses the spaCy library for advanced linguistic analysis
+- **Named Entity Recognition**: Identifies and extracts named entities (people, organizations, locations) from text
+- **Sentiment Analysis**: Determines the emotional tone and sentiment polarity of text segments
+- **Text Summarization**: Creates concise summaries of longer text passages
+- **Keyword Extraction**: Automatically identifies and extracts key terms and concepts
 
 ### 📊 Semantic Chunking
 - **Context Preservation**: Divides text into meaningful chunks while preserving sentence and paragraph integrity
 - **Customizable Dimensions**: Chunk size and overlap amount can be adjusted by the user
 - **Various Algorithm Options**: Recursive character splitting, token-based splitting, and sentence transformers-based splitting options
+- **Semantic Similarity Clustering**: Groups related content based on meaning rather than just proximity
+- **Multiple Clustering Algorithms**: Supports K-means, Agglomerative, DBSCAN, and Spectral clustering methods
+- **Hierarchical Chunking**: Preserves document structure based on headings and sections
+- **Sliding Window Approach**: Creates overlapping chunks with configurable window size and step
 
 ### 💡 AI-Ready Dataset Generation
 - **OpenAI Format Compliance**: Creates datasets in the system/user/assistant format required for fine-tuning OpenAI models
 - **Context-Sensitive Questions**: Generates questions that capture the main idea and important concepts of each text chunk
 - **Multilingual Support**: Language-specific question generation prompts for English, Turkish, and other languages
 - **Model Flexibility**: Ability to use different OpenAI models (GPT-3.5, GPT-4o, GPT-4o-mini) for question generation
+- **Advanced Question Types**: Generates diverse question formats including open-ended, multiple-choice, true/false, and fill-in-the-blank
+- **Customizable Difficulty Levels**: Adjustable question difficulty from easy to expert
+- **Bloom's Taxonomy Integration**: Questions target different cognitive levels (remembering, understanding, applying, analyzing, evaluating, creating)
+- **Domain-Specific Questions**: Specialized question generation for medical, legal, technical, and academic domains
 
 ### 🛠️ Advanced Tool Features
 - **Error Management**: Intelligent retry strategy and exponential backoff for API errors
@@ -92,6 +104,11 @@ pip install spacy
 python -m spacy download en_core_web_sm   # English language model
 python -m spacy download tr_core_news_sm  # Turkish language model
 
+# For advanced NLP features
+pip install transformers sentence-transformers torch nltk yake
+
+# For smart text chunking
+pip install scikit-learn networkx gensim
 ```
 
 
@@ -162,7 +179,55 @@ python -m corpuscrafter --file large_book.pdf --max-chunks 100 --pages 10-50
 
 # Use a local embedding model instead of API calls (reduces costs)
 python -m corpuscrafter --file document.pdf --use-local-embeddings
+```
 
+### Advanced Feature Usage
+
+CorpusCrafter's new advanced features provide even more powerful options for customization:
+
+```bash
+# Advanced Question Generation
+python -m corpuscrafter \
+  --file textbook.pdf \
+  --use-advanced-question-generator \
+  --question-types open_ended multiple_choice true_false \
+  --question-difficulty medium \
+  --cognitive-level understanding \
+  --questions-per-chunk 3 \
+  --include-answers \
+  --domain medical
+
+# Advanced NLP Processing
+python -m corpuscrafter \
+  --file research_paper.pdf \
+  --use-advanced-nlp \
+  --enable-ner \
+  --enable-sentiment \
+  --enable-summarization \
+  --enable-keyword-extraction \
+  --nlp-model-type transformer \
+  --use-gpu
+
+# Smart Text Chunking
+python -m corpuscrafter \
+  --file technical_manual.pdf \
+  --use-smart-chunking \
+  --semantic-chunking \
+  --clustering-method kmeans \
+  --n-clusters 5 \
+  --similarity-threshold 0.7 \
+  --chunk-method semantic_similarity
+
+# Combined Advanced Features
+python -m corpuscrafter \
+  --file academic_paper.pdf \
+  --use-advanced-question-generator \
+  --question-types open_ended analytical \
+  --use-advanced-nlp \
+  --enable-summarization \
+  --use-smart-chunking \
+  --semantic-chunking \
+  --clustering-method agglomerative
 ```
 
 When working with advanced options, you can combine multiple parameters to create a highly customized conversion pipeline. CorpusCrafter's modular architecture ensures that each component (extraction, processing, chunking, question generation) can be independently configured to match your specific requirements.
@@ -179,6 +244,34 @@ The tool generates a CSV file with the following structure:
 | uuid-1   |        | Text chunk 1…     | Question about chunk 1?       |
 | uuid-2   |        | Text chunk 2…     | Question about chunk 2?       |
 | …        |        | …                 | …                             |
+
+### Advanced Output Examples
+
+With advanced features enabled, the output can include more sophisticated content:
+
+#### Advanced Question Generation
+
+```csv
+chunk_id,system,user,assistant
+uuid-1,,The mitochondrion is often referred to as the powerhouse of the cell...,"{""question"":""What is the primary function of mitochondria in cells?"",""type"":""open_ended"",""difficulty"":""medium"",""cognitive_level"":""understanding""}"
+uuid-2,,Photosynthesis is the process by which plants convert light energy into chemical energy...,"{""question"":""Which of the following is NOT a product of photosynthesis?"",""type"":""multiple_choice"",""options"":{""A"":""Oxygen"",""B"":""Glucose"",""C"":""Carbon dioxide"",""D"":""ATP""},""answer"":""C"",""difficulty"":""hard"",""cognitive_level"":""analyzing""}"
+```
+
+#### Advanced NLP Processing
+
+```csv
+chunk_id,system,user,assistant,entities,sentiment,keywords,summary
+uuid-1,,The Supreme Court ruled in favor of the plaintiff...,Question about the ruling?,"{""Supreme Court"":""ORG"",""plaintiff"":""PERSON""}","{""polarity"":0.2,""subjectivity"":0.4}","{""Supreme Court"":0.8,""ruling"":0.7,""plaintiff"":0.6}","The Supreme Court made a favorable ruling for the plaintiff."
+```
+
+#### Smart Text Chunking
+
+```csv
+chunk_id,system,user,assistant,cluster_id,similarity_score,hierarchy_level
+uuid-1,,Introduction to machine learning...,Question about ML intro?,1,0.85,1
+uuid-2,,Types of supervised learning algorithms...,Question about supervised learning?,1,0.82,2
+uuid-3,,Quantum computing fundamentals...,Question about quantum computing?,2,0.91,1
+```
 
 ---
 
@@ -199,6 +292,30 @@ The tool generates a CSV file with the following structure:
 | `--list-languages`  | `-ll` | List supported languages                                        | —            |
 | `--version`         | `-v`  | Show version information                                        | —            |
 
+### Advanced Feature Options
+
+| Option                          | Description                                                     | Default      |
+|---------------------------------|-----------------------------------------------------------------|--------------|
+| `--use-advanced-question-generator` | Enable advanced question generation features                | `False`      |
+| `--question-types`              | Types of questions to generate (comma-separated)                | `open_ended` |
+| `--question-difficulty`         | Difficulty level of generated questions                         | `medium`     |
+| `--cognitive-level`             | Bloom's taxonomy cognitive level for questions                  | `understanding` |
+| `--questions-per-chunk`         | Number of questions to generate per text chunk                  | `1`          |
+| `--include-answers`             | Include answers with generated questions                        | `False`      |
+| `--domain`                      | Specific domain for question generation                         | —            |
+| `--use-advanced-nlp`            | Enable advanced NLP processing features                         | `False`      |
+| `--enable-ner`                  | Enable Named Entity Recognition                                 | `False`      |
+| `--enable-sentiment`            | Enable sentiment analysis                                       | `False`      |
+| `--enable-summarization`        | Enable text summarization                                       | `False`      |
+| `--enable-keyword-extraction`   | Enable keyword extraction                                       | `False`      |
+| `--nlp-model-type`              | Type of NLP model to use (spacy, transformer)                   | `spacy`      |
+| `--use-gpu`                     | Use GPU for NLP processing if available                         | `False`      |
+| `--use-smart-chunking`          | Enable smart text chunking features                             | `False`      |
+| `--semantic-chunking`           | Use semantic similarity for chunking                            | `False`      |
+| `--clustering-method`           | Clustering method for semantic chunking                         | `kmeans`     |
+| `--n-clusters`                  | Number of clusters for clustering methods                       | `5`          |
+| `--similarity-threshold`        | Similarity threshold for semantic similarity chunking           | `0.7`        |
+| `--chunk-method`                | Chunking method (semantic_similarity, sliding_window, etc.)     | `semantic_similarity` |
 
 
 ## 🔍 Technical Details
@@ -217,12 +334,20 @@ Text processing consists of several steps to enhance text quality:
 - **Question Filtering:** Identifying questions with question marks and language-specific question words
 - **Paragraph Structure Preservation:** Combining content under headings to create meaningful paragraphs
 - **Whitespace Normalization:** Organizing consecutive spaces and line breaks
+- **Named Entity Recognition:** Identifies and classifies named entities in text using transformer models
+- **Sentiment Analysis:** Determines emotional tone and polarity of text segments
+- **Text Summarization:** Creates concise summaries preserving key information
+- **Keyword Extraction:** Extracts important terms and concepts using statistical and ML methods
 
 ### Chunking Strategies
-The tool offers three different chunking strategies:
+The tool offers multiple chunking strategies:
 - **Recursive Character Splitting:** Recursively splits text according to specific separators (e.g., paragraphs, sentences)
 - **Token-Based Splitting:** Splits text according to token count, suitable for language models
 - **Sentence Transformers Splitting:** Uses a special transformer model to preserve sentence boundaries
+- **Semantic Similarity Chunking:** Groups text based on meaning rather than just proximity
+- **Clustering-Based Chunking:** Uses various clustering algorithms (K-means, Agglomerative, DBSCAN, Spectral)
+- **Hierarchical Chunking:** Preserves document structure based on headings and sections
+- **Sliding Window Approach:** Creates overlapping chunks with configurable window size and step
 
 ### Question Generation Process
 Question generation is performed using the OpenAI API as follows:
@@ -230,6 +355,10 @@ Question generation is performed using the OpenAI API as follows:
 - **Language-Specific Prompts:** Uses language-specific prompts to generate questions
 - **Model Parameters:** Controls question variety and length with temperature, top_p, and max_tokens values
 - **Error Handling:** Implements retry logic and backoff strategy for API errors
+- **Advanced Question Types:** Generates diverse question formats (open-ended, multiple-choice, true/false, fill-in-the-blank)
+- **Difficulty Levels:** Adjusts question complexity from easy to expert
+- **Cognitive Levels:** Targets different levels of Bloom's taxonomy
+- **Domain Specialization:** Customizes questions for specific domains like medical, legal, or academic content
 
 
 
@@ -253,6 +382,10 @@ This tool leverages the following open source projects:
 - OpenAI - For language models
 - pandas - For data manipulation
 - spaCy - For linguistic analysis (optional)
+- Transformers - For advanced NLP capabilities
+- Sentence-Transformers - For semantic text processing
+- scikit-learn - For clustering algorithms
+- NLTK - For natural language processing utilities
 
 
 
@@ -273,4 +406,17 @@ To improve text quality, you can optionally install the spaCy library and perfor
 ### Can it process tables and images in PDFs?
 The current version primarily focuses on textual content. Tables and images are automatically skipped or interpreted as plain text. Table detection and structured data extraction features may be added in future versions.
 
+### How do I use the advanced question generation features?
+Enable advanced question generation with the --use-advanced-question-generator flag and customize the types, difficulty, and cognitive levels of questions using the corresponding parameters.
 
+### What are the benefits of smart text chunking?
+Smart text chunking creates more semantically coherent chunks by grouping related content together, resulting in better context preservation and more meaningful questions.
+
+### Does the tool support GPU acceleration?
+Yes, for advanced NLP processing and smart text chunking, you can enable GPU acceleration with the --use-gpu flag if you have a compatible GPU available.
+
+### Can I customize the output format?
+Yes, you can export data in multiple formats and customize the structure of the output files. The default format is CSV, but you can also export to JSONL and other formats.
+
+### How do I handle documents in multiple languages?
+Use the --language auto option to automatically detect the document language, or specify the language explicitly with --language [code] if you know it in advance.
