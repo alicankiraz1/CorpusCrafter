@@ -1,0 +1,18 @@
+langchain>=0.2.0
+PyPDF2>=3.0.0
+pandas>=2.0.0
+openai>=1.25.0
+tqdm>=4.65.0
+python-dotenv>=1.0.0
+numpy>=1.24.0
+
+# Optional dependencies for advanced features
+langdetect>=1.0.9
+spacy>=3.5.0
+transformers>=4.30.0
+sentence-transformers>=2.2.2
+torch>=2.0.0
+nltk>=3.8.0
+scikit-learn>=1.2.0
+networkx>=3.0.0
+yake>=0.4.8
